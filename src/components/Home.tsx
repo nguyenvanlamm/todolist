@@ -1,13 +1,13 @@
-import React, { createContext, useContext, useState } from 'react'
-import Todo from './Todo';
-import { ContextData, DataProvider } from '../contexts/ContextData';
+import ListTodo from './ListTodo';
+import { DataProvider } from '../contexts/ContextData';
 
 const Home = () => {
-    
+
     return (
         <>
             <DataProvider >
-                <Todo></Todo>
+                {/* <h1>List </h1> */}
+                <ListTodo></ListTodo>
             </DataProvider>
         </>
     )

@@ -1,17 +1,25 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 
-interface DataTodo {
+export interface DataTodo {
+    userId: number,
     id: number,
     title: string,
-    description: string
+    completed: false
 }
 
-const defaultData: DataTodo[] = [{
+export const defaultValue: DataTodo[] = [{
+    userId: 1,
+    id: 0,
+    title: "REACT1",
+    completed: false
+}, {
+    userId: 1,
     id: 1,
-    title: "React",
-    description: "Learn"
-}]
+    title: "REACT2",
+    completed: false
+}
+]
 
 export const ContextData = createContext();
 
@@ -20,9 +28,18 @@ interface typeData {
 }
 
 export const DataProvider = ({ children }: typeData) => {
-    const [listTodo, setListTodo] = useState(defaultData);
+    const [listTodo, setListTodo] = useState<DataTodo[]>(defaultValue);
+    useEffect(() => {
+        fetch('https://jsonplaceholder.typicode.com/todos')
+            .then((respon) => respon.json())
+            .then((respons) => {
+                setListTodo(respons);
+            }
+            )
+            .catch(err => console.log(err));
+    }, [])
 
-    return <ContextData.Provider value={{listTodo, setListTodo}}>
+    return <ContextData.Provider value={{ listTodo, setListTodo }}>
         {children}
     </ContextData.Provider>
 }
