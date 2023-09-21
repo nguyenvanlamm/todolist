@@ -23,7 +23,7 @@ const Todo = (dataTodo: DataTodo) => {
 
     return (
         <>
-            <IconContext.Provider value={{color: 'blue'}}>
+            <IconContext.Provider value={{color: 'green'}}>
                 <div onClick={CheckDoneTodo} style={{ display: "flex", paddingTop: "20px", paddingLeft: "5%", paddingRight: "5%", marginTop: "10px", backgroundColor: "gray", justifyContent: "space-between"}}>
                     <div style={styleText}>{dataTodo.id} {dataTodo.title} {dataTodo.completed ? "true" : "false"}</div>
                     {dataTodo.completed ? <SiCheckmarx></SiCheckmarx> : <></>}

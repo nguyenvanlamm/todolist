@@ -20,8 +20,8 @@ const ListTodo = () => {
     return (
         <>
             <div className='flex flex-col'>
-                <input type='text' value={valueInput} onChange={(e) => setValueInput(e.target.value)}></input>
-                <button onClick={UpdateState}>Add todo</button>
+                <input type='text' style={{width:"80%", height: "40px"}} value={valueInput} onChange={(e) => setValueInput(e.target.value)}></input>
+                <button style={{marginLeft: "10px"}} onClick={UpdateState}>Add todo</button>
             </div>
             {listTodo == null ? <div>Not todo</div> : <div className=''>{
                 listTodo.map((item: DataTodo) => <div>
