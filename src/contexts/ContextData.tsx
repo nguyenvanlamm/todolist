@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 
 
 export interface DataTodo {
@@ -13,17 +13,13 @@ export const defaultValue: DataTodo[] = [{
     id: 0,
     title: "REACT1",
     completed: false
-}, {
-    userId: 1,
-    id: 1,
-    title: "REACT2",
-    completed: false
 }
 ]
 
-export interface TypeValue{
+export interface TypeValue {
     listTodo: DataTodo[],
-    setListTodo: React.Dispatch<React.SetStateAction<DataTodo[]>>
+    setListTodo: React.Dispatch<React.SetStateAction<DataTodo[]>>,
+    isLoading: boolean
 }
 
 
@@ -33,19 +29,35 @@ interface typeData {
     children: React.ReactNode
 }
 
+const reducer = (state: any, action: any) => {
+    switch (action.type) {
+        case "loading":
+            return true
+        case "loaded":
+            return false
+        default:
+            return false
+    }
+}
+
 export const DataProvider = ({ children }: typeData) => {
     const [listTodo, setListTodo] = useState<DataTodo[]>(defaultValue);
+    const [isLoading, Setload] = useReducer(reducer, true);
     useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/todos')
-            .then((respon) => respon.json())
-            .then((respons) => {
-                setListTodo(respons);
-            }
-            )
-            .catch(err => console.log(err));
+        Setload({ type: "loading" });
+        setTimeout(() => {
+            fetch('https://jsonplaceholder.typicode.com/todos')
+                .then((respon) => respon.json())
+                .then((respons) => {
+                    setListTodo(respons);
+                    Setload({ type: "loaded" });
+                }
+                )
+                .catch(err => console.log(err));
+        }, 5000);
     }, [])
 
-    return <ContextData.Provider value={{ listTodo, setListTodo }}>
+    return <ContextData.Provider value={{ listTodo, setListTodo, isLoading }}>
         {children}
     </ContextData.Provider>
 }
