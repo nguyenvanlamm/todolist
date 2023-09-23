@@ -30,6 +30,7 @@ interface typeData {
 }
 
 const reducer = (state: any, action: any) => {
+    console.log(state);
     switch (action.type) {
         case "loading":
             return true
