@@ -5,7 +5,7 @@ export interface DataTodo {
     userId: number,
     id: number,
     title: string,
-    completed: false
+    completed: boolean
 }
 
 export const defaultValue: DataTodo[] = [{
@@ -21,7 +21,13 @@ export const defaultValue: DataTodo[] = [{
 }
 ]
 
-export const ContextData = createContext();
+export interface TypeValue{
+    listTodo: DataTodo[],
+    setListTodo: React.Dispatch<React.SetStateAction<DataTodo[]>>
+}
+
+
+export const ContextData = createContext<TypeValue | undefined>(undefined);
 
 interface typeData {
     children: React.ReactNode

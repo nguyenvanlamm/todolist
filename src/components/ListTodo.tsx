@@ -1,9 +1,9 @@
 import { useContext, useState } from 'react'
-import { ContextData, DataTodo } from '../contexts/ContextData';
+import { ContextData, DataTodo, TypeValue } from '../contexts/ContextData';
 import Todo from './Todo';
 
 const ListTodo = () => {
-    const { listTodo, setListTodo } = useContext(ContextData);
+    const { listTodo, setListTodo } = useContext(ContextData) as TypeValue;
     const [valueInput, setValueInput] = useState("");
 
     const UpdateState = () => {
